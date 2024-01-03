@@ -19,15 +19,27 @@ fi
 
 echo -e "\n-----------------------------------------------\n"
 
-#  List all ec2 instances
+# List all ec2 instances
 echo "List of ec2 instances"
-aws ec2 describe-instances
+ec2_info=$(aws ec2 describe-instances)
+
+if [ "$(echo "$ec2_info" | jq -r '.Reservations')" == "[]" ]; then
+    echo "Err: No existing EC2 instances found"
+else
+    echo "$ec2_info"
+fi
 
 echo -e "\n-----------------------------------------------\n"
 
 # List all lambda functions
 echo "List of lambda functions"
-aws lambda list-functions
+lambda_info=$(aws lambda list-functions)
+
+if [ "$(echo "$lambda_info" | jq -r '.Functions')" == "[]" ]; then
+    echo "Err: No existing Lambda functions found"
+else
+    echo "$lambda_info"
+fi
 
 echo -e "\n-----------------------------------------------\n"
 
