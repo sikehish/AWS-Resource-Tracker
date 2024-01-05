@@ -1,2 +1,2 @@
 # AWS-Resource-Tracker
-A shell script that uses cron jobs that reports the usage of AWS resources linked to my account
+A shell script that reports the usage of AWS resources linked to my account
